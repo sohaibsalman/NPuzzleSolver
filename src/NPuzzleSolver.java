@@ -294,4 +294,15 @@ public class NPuzzleSolver
         return depth;
     }
     
+    protected void displayPath(PuzzleState tempState, String algoName, int num)
+    {
+        String path = getPath(tempState);
+        
+        PrintWriter write = initOutputFile();
+        write.println(algoName + " FOR PUZZLE " + puzzleNumber + " [" + num + " States Processed]" + " \n");
+        write.println(path + "\n");
+        
+        write.close();
+    }
+    
 }

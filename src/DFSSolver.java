@@ -28,8 +28,11 @@ public class DFSSolver extends NPuzzleSolver
         
         System.out.println("\nDFS\n");
         
+        int num = 0;
+        
         while(!newStates.isEmpty())
         {
+            num++;
             //DEQUEUE ELEMENT FROM QUEUE
             PuzzleState puzzle = newStates.pop(); 
             
@@ -123,13 +126,8 @@ public class DFSSolver extends NPuzzleSolver
             System.out.println(puzzle);
         }
         
-        String path = getPath(tempState);
-        
-        PrintWriter write = initOutputFile();
-        write.println("DFS FOR PUZZLE " + puzzleNumber + " \n");
-        write.println(path + "\n");
-        
-        write.close();
+        displayPath(tempState, "DFS", num);
+
     }
 
     

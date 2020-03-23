@@ -32,8 +32,11 @@ public class UCSSolver extends NPuzzleSolver
         
         System.out.println("\nUCS\n");
         
+        int num = 0;
+        
         while(!newStates.isEmpty())
         {
+            num++;
             //DEQUEUE ELEMENT FROM QUEUE
             PuzzleState puzzle = getMinimalCostState(newStates, goalState);
             
@@ -111,13 +114,8 @@ public class UCSSolver extends NPuzzleSolver
             System.out.println(puzzle);
         }
         
-        String path = getPath(tempState);
-        
-        PrintWriter write = initOutputFile();
-        write.println("UCS FOR PUZZLE " + puzzleNumber + " \n");
-        write.println(path + "\n");
-        
-        write.close();
+        displayPath(tempState, "UCS", num);
+
     }
 
     private boolean IsVisited(PuzzleState puzzle, List<PuzzleState> queue)

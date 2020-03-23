@@ -30,9 +30,11 @@ public class BFSSolver extends NPuzzleSolver
         
         System.out.println("\nBFS\n");
         
+        int processedStates = 0;
         
         while(!newStates.isEmpty())
         {
+            processedStates++;
             //DEQUEUE ELEMENT FROM QUEUE
             PuzzleState puzzle = newStates.remove(); 
             
@@ -127,13 +129,7 @@ public class BFSSolver extends NPuzzleSolver
             System.out.println(puzzle);
         }
         
-        String path = getPath(tempState);
-        
-        PrintWriter write = initOutputFile();
-        write.println("BFS FOR PUZZLE " + puzzleNumber + " \n");
-        write.println(path + "\n");
-        
-        write.close();
+        displayPath(tempState, "BFS", processedStates);
     }
 
     private boolean IsVisited(PuzzleState puzzle, Queue<PuzzleState> queue)

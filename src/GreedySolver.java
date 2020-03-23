@@ -29,8 +29,11 @@ public class GreedySolver extends InformedSearch
         
         System.out.println("\nGreedy\n");
         
+        int num = 0;
+        
         while(!newStates.isEmpty())
         {
+            num++;
             //DEQUEUE ELEMENT FROM QUEUE
             
             //PuzzleState puzzle = getNoOfMisplacedTiles(newStates, goalState);
@@ -128,13 +131,8 @@ public class GreedySolver extends InformedSearch
             System.out.println(puzzle);
         }
         
-        String path = getPath(tempState);
-        
-        PrintWriter write = initOutputFile();
-        write.println("Greedy BFS FOR PUZZLE " + puzzleNumber + " \n");
-        write.println(path + "\n");
-        
-        write.close();
+        displayPath(tempState, "GREEDY-BFS", num);
+
     }
    
 }
