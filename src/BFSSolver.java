@@ -30,6 +30,7 @@ public class BFSSolver extends NPuzzleSolver
         
         System.out.println("\nBFS\n");
         
+        
         while(!newStates.isEmpty())
         {
             //DEQUEUE ELEMENT FROM QUEUE

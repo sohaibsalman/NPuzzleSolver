@@ -123,7 +123,6 @@ public class DFSSolver extends NPuzzleSolver
             System.out.println(puzzle);
         }
         
-        
         String path = getPath(tempState);
         
         PrintWriter write = initOutputFile();

@@ -1,9 +1,7 @@
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,7 +13,7 @@ import java.util.Queue;
  *
  * @author sohai
  */
-public class ASolver extends NPuzzleSolver
+public class ASolver extends InformedSearch
 {
         void solve(PuzzleState puzzleState)
     {
@@ -30,9 +28,7 @@ public class ASolver extends NPuzzleSolver
         PuzzleState tempState = null;
         
         System.out.println("\nA*\n");
-        
-        int depth = 0;      //TO STORE DEPTH OF CURRENT NOTE
-        
+                
         while(!newStates.isEmpty())
         {
             //DEQUEUE ELEMENT FROM QUEUE
@@ -90,7 +86,7 @@ public class ASolver extends NPuzzleSolver
                 if(!IsVisited(tempState, newStates))
                 {
                     if(!IsVisited(tempState, exploredStates))
-                    {
+                    {                   
                         newStates.add(tempState);
                     }
                 }
@@ -104,7 +100,7 @@ public class ASolver extends NPuzzleSolver
                 if(!IsVisited(tempState, newStates))
                 {
                     if(!IsVisited(tempState, exploredStates))
-                    {
+                    {                    
                         newStates.add(tempState);
                     }
                 }
@@ -119,76 +115,5 @@ public class ASolver extends NPuzzleSolver
         write.println(path + "\n");
         
         write.close();
-    }
-
-    private boolean IsVisited(PuzzleState puzzle, List<PuzzleState> queue)
-    {
-        Queue<PuzzleState> temp = new LinkedList<>(queue);
-        
-        while(!temp.isEmpty())
-        {
-            PuzzleState st = temp.remove();
-            
-            if(st.size != puzzle.size)
-                continue;
-            if(st.zeroPosition.i != puzzle.zeroPosition.i || st.zeroPosition.j != puzzle.zeroPosition.j)
-                continue;
-                    
-            int count = 0;
-
-            for (int i = 0; i < st.size; i++)
-            {
-                for (int j = 0; j < st.size; j++)
-                {
-                    if(st.state[i][j] == puzzle.state[i][j])
-                        count++;
-                }
-            }
-            if(count == puzzle.size*puzzle.size)
-                return true;
-        }
-        return false;
-    }
-
-    private PuzzleState getNoOfMisplacedTiles(List<PuzzleState> newStates, PuzzleState[] goalStates)
-    {
-        List<Integer> costArray = new ArrayList<>();
-        
-        for (PuzzleState newState : newStates)
-        {
-            int cost = getStateCost(newState, goalStates);
-            costArray.add(cost);
-        }
-        
-        int index = -1;
-        int min = costArray.get(0);
-        for (int i = 0; i < costArray.size(); i++)
-        {
-            if(costArray.get(i) <= min)
-            {
-                min = costArray.get(i);
-                index++;
-            }
-        }
-        
-        return newStates.remove(index);
-    }
-
-    private int getStateCost(PuzzleState newState, PuzzleState[] goalStates)
-    {
-        int cost1 = 0;
-        int cost2 = 0;
-        for (int i = 0; i < newState.size; i++)
-        {
-            for (int j = 0; j < newState.size; j++)
-            {
-                if(newState.state[i][j] == goalStates[0].state[i][j])
-                    cost1++;
-                if(newState.state[i][j] == goalStates[1].state[i][j])
-                    cost2++;
-            }
-        }
-        return Integer.max(cost1, cost2);
-    }
-
+    }   
 }

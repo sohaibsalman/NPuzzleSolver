@@ -46,12 +46,15 @@ public class NPuzzleSolver
         {
             PuzzleState state = initPuzzleStates.remove();
             new BFSSolver().solve(state);
-            new DFSSolver().solve(state);
+            //new DFSSolver().solve(state);
             new UCSSolver().solve(state);
             new GreedySolver().solve(state);
+            new ASolver().solve(state);
+                        
             puzzleNumber++;
         }
     }
+    
     
     private void getFileData()
     {
@@ -280,5 +283,15 @@ public class NPuzzleSolver
         return list;
     }
     
+    protected int getDepth(PuzzleState newState)
+    {
+        int depth = 0;
+        while (newState.parent != null)
+        {            
+            depth++;
+            newState = newState.parent;
+        }
+        return depth;
+    }
     
 }
